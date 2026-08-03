@@ -91,15 +91,6 @@ h1 span{display:block;color:#7FA9AC;font-weight:400;letter-spacing:-.01em}
 /* ---------- content ---------- */
 main{max-width:980px;margin:0 auto;padding:22px 18px 60px}
 
-.note{
-  background:var(--card);border-left:5px solid var(--signal);
-  padding:16px 18px;margin:0 0 26px;
-}
-.note h2{margin:0 0 10px;font-size:15px;text-transform:uppercase;letter-spacing:.08em}
-.note ul{margin:0;padding-left:18px;font-size:14.5px}
-.note li{margin-bottom:7px}
-.note b{color:var(--signal)}
-
 .sec{margin:32px 0 12px;display:flex;align-items:baseline;gap:12px}
 .sec h2{
   margin:0;font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;
@@ -161,6 +152,12 @@ footer{
   font-size:12.5px;color:var(--muted);border-top:1px solid var(--rule);
 }
 footer p{margin:0 0 8px;max-width:70ch}
+.rights{
+  margin-top:16px;padding-top:14px;border-top:1px solid var(--rule);
+  line-height:1.7;color:var(--ink);font-size:13px;
+}
+.rights b{font-weight:750}
+.rights .mono{color:var(--muted);font-size:11.5px}
 
 @media (max-width:520px){
   .card{grid-template-columns:26px 1fr}
@@ -201,19 +198,6 @@ footer p{margin:0 0 8px;max-width:70ch}
 </div>
 
 <main>
-  <div class="note">
-    <h2>Corrections to the source infographic</h2>
-    <ul>
-      <li><b>Cyanide.</b> The graphic says sodium nitrate. The drug is sodium <b>nitrite</b> — a different compound — and it is no longer first line. <b>Hydroxocobalamin</b> is the FDA-approved first-line antidote; nitrite-induced methemoglobinemia worsens hypoxia when carbon monoxide is also present, which is nearly every fire victim.</li>
-      <li><b>Benzodiazepines.</b> Flumazenil is listed as if it were routine. It is not. In an undifferentiated overdose it can precipitate seizures that are then refractory to benzodiazepines. Its real niche is iatrogenic procedural sedation in a benzodiazepine-naive patient.</li>
-      <li><b>Digoxin.</b> Digibind was discontinued in the United States. The available product is <b>DigiFab</b>, with different vial math.</li>
-      <li><b>Warfarin.</b> Vitamin K alone does not stop major bleeding — it takes 6 to 24 hours. Life-threatening bleeding needs 4-factor PCC alongside it.</li>
-      <li><b>Heparin.</b> Protamine fully reverses unfractionated heparin, only partially reverses LMWH, and does nothing for fondaparinux.</li>
-      <li><b>Organophosphates.</b> Atropine alone is incomplete. The regimen is atropine plus pralidoxime plus a benzodiazepine, and the atropine endpoint is dried bronchial secretions, not pupil size or heart rate.</li>
-      <li><b>Missing categories.</b> DOAC reversal, toxic alcohols, carbon monoxide, envenomation, chelation, botulism, local anesthetic toxicity, neuromuscular blockade, malignant hyperthermia, and radionuclide decorporation are all absent from the original list.</li>
-    </ul>
-  </div>
-
   <div id="results"></div>
 
   <div class="legend">
@@ -232,7 +216,9 @@ footer p{margin:0 0 8px;max-width:70ch}
   <div>
     <p>Compiled and fact-checked against FDA labeling, CDC/CHEMM, AHA 2023 toxicology guidelines, ASRA 2020 LAST checklist, EXTRIP recommendations, and current primary literature through August 2026. Where a product's regulatory status was in motion at the time of writing — bentracimab, IV silibinin, cobinamide — the entry says so rather than implying availability.</p>
     <p>This is a decision-support reference for trained clinicians, not a protocol and not a substitute for a regional poison center. Confirm every dose against your own institution's formulary before administration. Pediatric dosing is weight-based and is only given where it differs materially from the adult approach.</p>
-    <p class="mono">Offline single-file build · no network calls · print-ready</p>
+    <p class="rights">Compiled by <b>Jae Hyek Choi, MSc, PhD, DVSc</b><br>
+    © 2026 Jae Hyek Choi. All rights reserved.<br>
+    <span class="mono">Offline single-file build · no network calls · print-ready</span></p>
   </div>
 </footer>
 
@@ -297,7 +283,7 @@ const DATA = [
  d:"5 g IV as two consecutive 2.5 g/50 mL vials, no more than 15 min apart\nNo renal dose adjustment; restart dabigatran at 24 h if hemostasis achieved",
  p:"With massive ingestion or renal failure, redistribution can cause rebound anticoagulation — recheck a dilute thrombin time or ecarin clotting time and be prepared to redose. Unlike the factor Xa inhibitors, dabigatran is substantially dialyzable, which is a genuine second option."},
 {c:"Anticoagulants & antiplatelets",v:"B",t:"Apixaban, rivaroxaban — life-threatening bleeding",a:"Andexanet alfa (Andexxa), or 4F-PCC",
- d:"Andexanet low dose: 400 mg bolus + 4 mg/min × 120 min\nHigh dose: 800 mg bolus + 8 mg/min × 120 min (chosen by agent, dose, and time since last dose)\n4F-PCC alternative: 50 U/kg",
+ d:"Low dose: 400 mg bolus (~30 mg/min) then 4 mg/min × 120 min (total 480 mg)\nHigh dose: 800 mg bolus then 8 mg/min × 120 min (total 960 mg)\nLow dose only if apixaban ≤5 mg or rivaroxaban ≤10 mg AND ≥8 h since the last dose; everything else, including unknown timing, gets high dose\n4F-PCC alternative: 50 U/kg",
  p:"ANNEXA-I showed better hemostasis but roughly 10% thrombotic events. Andexanet also causes profound heparin resistance — never give it to a patient heading for cardiopulmonary bypass; use bivalirudin if it has already been administered. Cost and availability push most centers to 4F-PCC as the practical alternative."},
 {c:"Anticoagulants & antiplatelets",v:"D",t:"Edoxaban, betrixaban",a:"Andexanet alfa is not FDA-approved for these agents",
  d:"4F-PCC 50 U/kg is the pragmatic choice",
@@ -314,7 +300,7 @@ const DATA = [
 
 /* ============ CARDIOVASCULAR ============ */
 {c:"Cardiovascular",v:"A",t:"Digoxin and cardiac glycosides (oleander, foxglove, lily of the valley, Bufo toad)",a:"Digoxin immune Fab (DigiFab)",
- d:"Acute, unknown amount: 10–20 vials; cardiac arrest: 20 vials\nKnown level: vials = (serum digoxin ng/mL × weight kg) ÷ 100\nKnown ingested dose: vials = (mg ingested × 0.8) ÷ 0.5\nChronic toxicity: 3–6 vials usually suffices",
+ d:"Acute, unknown amount: 10 vials, then a further 10 if needed (staged, per label, to limit febrile reaction); 20 vials in arrest\nKnown level: vials = (serum digoxin ng/mL × weight kg) ÷ 100\nKnown ingested dose: vials = (mg ingested × 0.8) ÷ 0.5 mg bound per vial\nChronic toxicity: 3–6 vials; small children <20 kg often 1 vial",
  p:"Digibind is discontinued in the US — the vial math differs, so use DigiFab figures. After Fab, potassium shifts back intracellularly and can drop precipitously; monitor closely and do not over-treat the initial hyperkalemia. Calcium in digoxin toxicity remains widely avoided. Total digoxin assays become uninterpretable for days once Fab is on board."},
 {c:"Cardiovascular",v:"C",t:"Beta-blocker overdose",a:"Glucagon",
  d:"3–5 mg IV bolus over 1–2 min, up to 10 mg; if it works, infuse 2–5 mg/h\nPre-treat with an antiemetic",
@@ -341,7 +327,7 @@ const DATA = [
  d:"1–2 mg/kg IV over 5 min; may repeat once at 1 h\nTreat if MetHb >20–30%, or >10% with cardiopulmonary disease or symptoms",
  p:"Absolutely contraindicated in G6PD deficiency — it causes hemolysis and paradoxically worsens the methemoglobinemia; use ascorbic acid, exchange transfusion, or hyperbaric oxygen instead. Methylene blue is a potent MAO-A inhibitor and precipitates serotonin syndrome with SSRIs and SNRIs. Cumulative doses above 7 mg/kg induce methemoglobinemia themselves. Pulse oximetry is unreliable — get co-oximetry."},
 {c:"Cardiovascular",v:"C",t:"Dapsone-induced methemoglobinemia specifically",a:"Methylene blue + cimetidine + multi-dose activated charcoal",
- d:"Methylene blue 1–2 mg/kg; cimetidine 400 mg PO TID; MDAC 25 g q4h",
+ d:"Methylene blue 1–2 mg/kg (confirm G6PD status first); cimetidine 400 mg PO TID; MDAC 25 g q4h",
  p:"Dapsone's half-life is 30 hours and its hydroxylamine metabolite keeps regenerating methemoglobin. A single dose of methylene blue produces a rebound at 6 to 12 hours; anticipate it and admit."},
 {c:"Cardiovascular",v:"C",t:"Refractory vasoplegic shock (post-bypass, ACE inhibitor, sepsis)",a:"Methylene blue or hydroxocobalamin",
  d:"Methylene blue 1–2 mg/kg IV over 20 min, then 0.5 mg/kg/h\nHydroxocobalamin 5 g IV when methylene blue is contraindicated",
@@ -389,7 +375,7 @@ const DATA = [
  d:"1–3 mg IV, then DOUBLE the dose every 3–5 min until secretions dry\nInfusion at 10–20% of the total loading dose per hour\nCumulative doses of several hundred milligrams are routine",
  p:"The endpoint is dried bronchial secretions and adequate oxygenation — not pupil size, not heart rate. Miosis persists long after adequate atropinization and chasing it causes toxicity; conversely, stopping atropine because the heart rate rose leaves the patient drowning in their own secretions. Decontaminate the patient and protect staff: dermal absorption from clothing has poisoned ED personnel."},
 {c:"Cholinergic",v:"B",t:"Organophosphate — nicotinic effects and aging prevention",a:"Pralidoxime (2-PAM)",
- d:"30 mg/kg IV over 30 min, then 8–10 mg/kg/h infusion\nContinue at least 24 h past the last atropine requirement",
+ d:"30 mg/kg IV over 30 min (max 2 g), then 8–10 mg/kg/h infusion (max 650 mg/h)\nWHO regimen: 30 mg/kg load then 8 mg/kg/h\nContinue at least 24 h past the last atropine requirement",
  p:"Must be given with atropine, never alone — oximes transiently worsen cholinergic effects. Its value depends on reaching the enzyme before irreversible aging, which varies enormously by compound. Efficacy in pesticide poisoning remains genuinely contested; efficacy in nerve agent exposure is not."},
 {c:"Cholinergic",v:"A",t:"Nerve agents (sarin, soman, tabun, VX, Novichok class)",a:"Atropine + pralidoxime + benzodiazepine",
  d:"DuoDote / ATNAA autoinjector: atropine 2.1 mg + pralidoxime 600 mg IM; up to 3 in rapid succession\nSeizure prophylaxis: midazolam 10 mg IM, or diazepam 10 mg (CANA autoinjector)\nThen convert to IV atropine titration and a pralidoxime infusion",
@@ -420,7 +406,7 @@ const DATA = [
  d:"50 mg IV q4–6h until symptoms resolve; also used prophylactically in prior episodes\nThiamine 100 mg IV is an adjunct",
  p:"Rule out hyponatremia, hypoglycemia, and CNS metastasis first — the diagnosis is clinical and the differential is broad. Same G6PD and serotonergic cautions as any methylene blue use."},
 {c:"Antineoplastic & immunologic",v:"A",t:"Anthracycline extravasation",a:"Dexrazoxane (Totect)",
- d:"1000 mg/m² day 1, 1000 mg/m² day 2, 500 mg/m² day 3\nFirst dose within 6 h of extravasation; large vein away from the affected limb\nRemove any topical cooling 15 min before infusion",
+ d:"Day 1: 1000 mg/m² (max 2000 mg) · Day 2: 1000 mg/m² (max 2000 mg) · Day 3: 500 mg/m² (max 1000 mg)\nInfuse over 1–2 h; first dose within 6 h of extravasation; large vein away from the affected limb\nReduce dose 50% if CrCl <40 mL/min\nRemove any topical cooling 15 min before infusion",
  p:"Cold packs and dexrazoxane are antagonistic — cooling reduces its efficacy. Dimethyl sulfoxide is the alternative regimen but must not be combined with dexrazoxane."},
 {c:"Antineoplastic & immunologic",v:"C",t:"Vinca alkaloid or hyperosmolar extravasation",a:"Hyaluronidase + warm compresses",
  d:"150 units subcutaneously in 1 mL, injected in 5 divided doses around the site\nWarm compress — the opposite of anthracycline management",
@@ -460,7 +446,7 @@ const DATA = [
 
 /* ============ METALS ============ */
 {c:"Metals & radionuclides",v:"A",t:"Iron",a:"Deferoxamine",
- d:"15 mg/kg/h IV infusion; consider higher rates briefly in shock\nIndications: serum iron >500 µg/dL, shock, acidosis, persistent vomiting, or radiopaque tablets on film\nStop when acidosis resolves and urine colour normalizes, typically <24 h",
+ d:"15 mg/kg/h IV infusion — faster rates cause hypotension\nLabel ceiling 6 g/24 h; toxicology practice commonly exceeds it in severe poisoning\nIndications: serum iron >500 µg/dL, shock, acidosis, persistent vomiting, or radiopaque tablets on film\nStop when acidosis resolves and urine colour normalizes, typically <24 h",
  p:"Activated charcoal does not bind iron — whole bowel irrigation is the decontamination method. Vin rosé urine is neither sensitive nor specific and should not be your endpoint. Infusions beyond 24 hours are linked to ARDS and to Yersinia enterocolitica sepsis. Iron levels drawn late are falsely reassuring as iron distributes into tissue."},
 {c:"Metals & radionuclides",v:"B",t:"Lead — encephalopathy or blood lead >70 µg/dL",a:"Dimercaprol (BAL) first, then CaNa₂EDTA",
  d:"BAL 4 mg/kg deep IM q4h — start FIRST\nCaNa₂EDTA 1500 mg/m²/day continuous infusion, beginning 4 h after BAL\nContinue 5 days, then reassess",
@@ -478,7 +464,7 @@ const DATA = [
  d:"Penicillamine 250–500 mg PO QID; trientine 750–1500 mg/day\nZinc acetate 50 mg TID for maintenance",
  p:"Penicillamine causes paradoxical neurologic worsening in a substantial minority of neurologic Wilson disease at initiation — trientine is the safer start. Acute copper sulfate ingestion causes hemolysis and hepatic necrosis and behaves like a different illness."},
 {c:"Metals & radionuclides",v:"A",t:"Thallium",a:"Prussian blue (ferric hexacyanoferrate, Radiogardase)",
- d:"3 g PO three times daily; continue until urinary thallium falls\nMulti-dose activated charcoal is a reasonable adjunct",
+ d:"Adults and adolescents 3 g PO three times daily; children 2–12 y, 1 g three times daily\nContinue until urinary thallium falls; treatment often runs 30 days or more\nMulti-dose activated charcoal is a reasonable adjunct",
  p:"Alopecia and painful ascending neuropathy appear late; by the time the hair falls out, the exposure is one to two weeks old. Hemodialysis is only useful very early."},
 {c:"Metals & radionuclides",v:"A",t:"Radioactive cesium-137 and thallium-201 internal contamination",a:"Prussian blue (Radiogardase)",
  d:"Adults 3 g PO TID; children 2–12 y, 1 g TID\nContinue for 30 days or longer, guided by bioassay",
@@ -487,7 +473,7 @@ const DATA = [
  d:"Ca-DTPA 1 g IV over 3–4 min or nebulized, within the first 24 h\nSwitch to Zn-DTPA 1 g daily for maintenance",
  p:"Ca-DTPA is more effective early but depletes essential trace metals with repeated use — the switch to Zn-DTPA at 24 hours is not optional. Avoid DTPA in uranium and neptunium contamination because of nephrotoxicity."},
 {c:"Metals & radionuclides",v:"A",t:"Radioiodine (I-131) exposure",a:"Potassium iodide (KI)",
- d:"Adults 130 mg PO daily; children 65 mg; infants 16–32 mg\nMost effective within 4 h before or after exposure; benefit falls off sharply after 12 h",
+ d:"Adults and adolescents ≥70 kg: 130 mg PO once daily\nChildren 3–18 y: 65 mg · 1 month–3 y: 32 mg · neonates <1 month: 16 mg\nRepeat daily only while exposure risk persists\nGreatest benefit immediately before or within a few hours of exposure; efficacy falls steeply thereafter",
  p:"KI blocks thyroid uptake of radioiodine and nothing else — it is useless for cesium, strontium, or any other isotope, and taking it 'for radiation' is a common public misconception. Contraindicated in iodine allergy and dermatitis herpetiformis."},
 {c:"Metals & radionuclides",v:"A",t:"Hematopoietic acute radiation syndrome",a:"Filgrastim, pegfilgrastim, sargramostim, romiplostim",
  d:"Filgrastim 10 µg/kg/day SC; pegfilgrastim 6 mg SC weekly × 2\nSargramostim 7 µg/kg/day; romiplostim 10 µg/kg SC × 1 (approved January 2021)\nStart as soon as exposure to a myelosuppressive dose is suspected",
@@ -504,7 +490,7 @@ const DATA = [
  d:"3–5 vials IV for a credible bite, repeat as needed\nSupply is limited; contact poison control early to locate stock",
  p:"Neurotoxicity is delayed up to 12 hours and then progresses to respiratory failure. Treat on the basis of a credible bite; waiting for symptoms means intubating before the antivenom arrives. Local findings are minimal and falsely reassuring."},
 {c:"Envenomation",v:"A",t:"Centruroides scorpion sting",a:"Anascorp (equine F(ab')₂)",
- d:"3 vials IV over 10 min, then 1 vial q30–60 min for persistent symptoms\nResolution of the neuromotor syndrome is typically within 1–4 h",
+ d:"Initial dose 3 vials, diluted to 50 mL, IV over 10 min\nThen 1 vial at a time at 30–60 min intervals for persistent symptoms\nMonitor closely during and for 60 min after the infusion",
  p:"Grade III–IV envenomation in small children — opsoclonus, roving eye movements, thrashing — is often mistaken for a seizure or dystonic reaction. Benzodiazepine sedation alone risks respiratory failure and a prolonged ICU stay that antivenom prevents."},
 {c:"Envenomation",v:"B",t:"Latrodectus (black widow) envenomation",a:"Antivenin Latrodectus mactans (equine whole IgG)",
  d:"1 vial diluted in 50 mL saline over 30 min; repeat once if needed\nOpioids and benzodiazepines for pain and spasm",
@@ -521,7 +507,7 @@ const DATA = [
  d:"One vial IV, weight-adjusted in children\nObtained through the state health department and the CDC Emergency Operations Center: 770-488-7100",
  p:"Antitoxin binds only circulating toxin — it halts progression but reverses nothing already bound at the nerve terminal. Every hour of diagnostic hesitation is permanent paralysis. Give it on clinical suspicion; do not wait for laboratory confirmation, which takes days. Descending, symmetric, bulbar-first weakness with a clear sensorium is the pattern."},
 {c:"Biological toxins & infection",v:"A",t:"Infant botulism (<1 y, toxin types A and B)",a:"BabyBIG (human botulism immune globulin IV)",
- d:"50 mg/kg IV once\nAvailable only from the California Infant Botulism Treatment and Prevention Program: 510-231-7600",
+ d:"50 mg/kg (1.0 mL/kg) IV as a single infusion, through a dedicated line\nStart at 0.5 mL/kg/h; if tolerated at 15 min, increase to 1.0 mL/kg/h — do not exceed\nAvailable only from the California Infant Botulism Treatment and Prevention Program: 510-231-7600",
  p:"Do not give equine BAT to an infant if BabyBIG is obtainable — the human product avoids serum sickness and shortens hospital stay by weeks. Aminoglycosides potentiate the neuromuscular blockade and should be avoided for any concurrent infection."},
 {c:"Biological toxins & infection",v:"B",t:"Tetanus",a:"Human tetanus immune globulin + metronidazole + wound debridement",
  d:"HTIG 3000–6000 units IM, part infiltrated around the wound\nMetronidazole 500 mg IV q6–8h (preferred over penicillin)\nBenzodiazepines, magnesium infusion, and often neuromuscular blockade for spasms",
@@ -564,7 +550,7 @@ const DATA = [
  d:"Over 70 kg: 100 mL bolus over 2–3 min, then 200–250 mL over 15–20 min\nUnder 70 kg: 1.5 mL/kg bolus, then 0.25 mL/kg/min\nPersistent instability: repeat bolus, double the infusion rate; ceiling ~12 mL/kg\nASRA 2020 checklist",
  p:"Reduce epinephrine to boluses of 1 µg/kg or less — standard ACLS doses impair resuscitation in LAST. Avoid vasopressin, calcium channel blockers, beta-blockers, and any further local anesthetic. Call for the lipid before you are sure you need it, and keep monitoring at least 4 to 6 hours after apparent recovery: relapse is documented."},
 {c:"Anesthesia & procedural",v:"A",t:"Rocuronium or vecuronium blockade",a:"Sugammadex",
- d:"2 mg/kg at reappearance of the second twitch\n4 mg/kg at post-tetanic count 1–2\n16 mg/kg for immediate reversal 3 min after a rocuronium intubating dose",
+ d:"2 mg/kg at reappearance of the second twitch\n4 mg/kg at post-tetanic count 1–2\n16 mg/kg for immediate reversal ~3 min after a single 1.2 mg/kg rocuronium dose",
  p:"It binds hormonal contraceptives — patients need seven days of backup contraception, and telling them is not optional. Marked bradycardia and asystole have been reported within minutes. It does nothing for succinylcholine or for benzylisoquinolinium agents such as cisatracurium and atracurium."},
 {c:"Anesthesia & procedural",v:"A",t:"Non-depolarizing blockade — routine reversal",a:"Neostigmine + glycopyrrolate",
  d:"Neostigmine 0.03–0.07 mg/kg with glycopyrrolate 0.2 mg per 1 mg neostigmine\nRequires at least some twitch response — will not reverse deep block",
