@@ -3,7 +3,7 @@
 Emergency toxicology antidote reference — 115 entries across 18 categories.
 Offline-first, no server, no accounts, no patient data.
 
-**Live:** https://choij1104.github.io/antidote-reference/
+**Live:** https://choij1104.github.io/antidotes-referense/
 
 ## What this is
 
@@ -19,8 +19,8 @@ Data and presentation are separate. One canonical dataset, one view on top of it
 
 ```
 index.html          view; carries an embedded baseline copy of the data
-data/antidotes.json canonical dataset — edit here
-data/version.json   version, review dates, changelog
+antidotes.json      canonical dataset — edit here
+version.json        version, review dates, changelog
 sw.js               service worker — offline shell
 manifest.json       installable to the home screen
 QA-log.md           verification record
@@ -28,17 +28,17 @@ QA-log.md           verification record
 
 **Offline behaviour.** The full dataset ships inside `index.html`, so the app opens with
 no network on first launch, from any origin, even off the filesystem. When online it
-fetches `data/version.json` (a few hundred bytes); if the version differs it pulls the
+fetches `version.json` (a few hundred bytes); if the version differs it pulls the
 newer dataset in the background and updates silently. A failed or blocked fetch changes
 nothing — the embedded baseline stands. The app never waits on the network to render.
 
-There is no API and no backend. `data/version.json` served as a static file is the entire
+There is no API and no backend. `version.json` served as a static file is the entire
 update mechanism.
 
 ## Updating the data
 
-1. Edit `data/antidotes.json`.
-2. Bump `version` and `lastReviewed` in `data/version.json`, set `nextReviewDue`, add a changelog line.
+1. Edit `antidotes.json`.
+2. Bump `version` and `lastReviewed` in `version.json`, set `nextReviewDue`, add a changelog line.
 3. Rebuild `index.html` so its embedded baseline matches, and bump `CACHE` in `sw.js`.
 
 Entry schema:
@@ -80,7 +80,7 @@ the due date passes, the indicator turns amber and the app tells the reader to v
 against current labelling. Supply-volatile agents — physostigmine, glucagon, antivenoms,
 DTPA — are checked every cycle.
 
-Current status is recorded in `data/version.json` and the verification record in `QA-log.md`.
+Current status is recorded in `version.json` and the verification record in `QA-log.md`.
 
 ---
 
