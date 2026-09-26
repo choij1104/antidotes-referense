@@ -60,7 +60,7 @@ h1 span{display:block;color:#7FA9AC;font-weight:400;letter-spacing:-.01em}
 .chips{display:flex;gap:6px;overflow-x:auto;padding:10px 0 2px;max-width:980px;margin:0 auto;
   -webkit-overflow-scrolling:touch;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
-.chip{flex:0 0 auto;padding:6px 11px;font-size:12.5px;border:1px solid var(--rule);
+.chip{flex:0 0 auto;padding:12px 14px;min-height:44px;font-size:12.5px;border:1px solid var(--rule);
   background:#fff;color:var(--muted);cursor:pointer;font-family:inherit;white-space:nowrap}
 .chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
 .chip:focus-visible{outline:3px solid var(--teal);outline-offset:1px}
@@ -136,6 +136,7 @@ footer p{margin:0 0 8px;max-width:70ch}
 }
 .card{transition:border-color .12s ease}
 .card:hover{border-color:var(--ink)}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
 </style>
 </head>
 <body>
@@ -224,11 +225,11 @@ function fmt(iso){
 async function checkForUpdate(){
   if (!navigator.onLine) { $("netLabel").textContent = "Offline — using stored data"; return; }
   try {
-    const r = await fetch("data/version.json", {cache:"no-store"});
+    const r = await fetch("./version.json", {cache:"no-store"});
     if (!r.ok) return;
     const v = await r.json();
     if (v.version === VERSION.version) return;
-    const d = await fetch("data/antidotes.json", {cache:"no-store"});
+    const d = await fetch("./antidotes.json", {cache:"no-store"});
     if (!d.ok) return;
     const rows = await d.json();
     if (!Array.isArray(rows) || rows.length < 50) return;   // sanity gate
