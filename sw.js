@@ -3,8 +3,8 @@
    network-first with cache fallback for the data, so an online user silently gets
    the newest reviewed dataset and an offline user is never blocked. */
 
-const CACHE = 'antidote-v2026.08.02';
-const SHELL = ['./', './index.html', './manifest.json', './icon.svg'];
+const CACHE = 'antidote-v2026.09.26a';
+const SHELL = ['./', './index.html', './manifest.json', './icon.svg', './version.json', './antidotes.json'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
@@ -21,14 +21,16 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
-  const isData = req.url.includes('/data/');
+  const isData = req.url.endsWith('/antidotes.json') || req.url.endsWith('/version.json');
 
   if (isData) {
     e.respondWith(
       fetch(req)
         .then(res => {
-          const copy = res.clone();
-          caches.open(CACHE).then(c => c.put(req, copy));
+          if (res.ok) {
+            const copy = res.clone();
+            caches.open(CACHE).then(c => c.put(req, copy));
+          }
           return res;
         })
         .catch(() => caches.match(req))
@@ -36,8 +38,10 @@ self.addEventListener('fetch', e => {
   } else {
     e.respondWith(
       caches.match(req).then(hit => hit || fetch(req).then(res => {
-        const copy = res.clone();
-        caches.open(CACHE).then(c => c.put(req, copy));
+        if (res.ok) {
+          const copy = res.clone();
+          caches.open(CACHE).then(c => c.put(req, copy));
+        }
         return res;
       }))
     );
