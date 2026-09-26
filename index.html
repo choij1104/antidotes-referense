@@ -234,7 +234,8 @@ async function checkForUpdate(){
     const rows = await d.json();
     if (!Array.isArray(rows) || rows.length < 50) return;   // sanity gate
     DATA = rows; VERSION = v;
-    stamp(); render();
+    if (activeCat !== "All" && !DATA.some(d=>d.category===activeCat)) activeCat = "All";
+    stamp(); buildChips(); render();
     $("updateNote").textContent = "· updated to " + v.version;
   } catch (e) { /* offline, blocked, or served from file:// — baseline stands */ }
 }
