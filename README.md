@@ -84,5 +84,5 @@ Current status is recorded in `version.json` and the verification record in `QA-
 
 ---
 
-Compiled by **Jae Hyek Choi, MSc, PhD, DVSc**
-© 2026 Jae Hyek Choi. All rights reserved.
+Compiled by **HAKOYA LLC dba Auravyx Systems**
+© 2026 HAKOYA LLC dba Auravyx Systems. All rights reserved.
