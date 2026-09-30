@@ -1,7 +1,7 @@
 # Antidote Reference — Verification & Debug Log
 
 **File:** index.html (115 entries, 18 categories)
-**Author:** HAKOYA LLC dba Auravyx Systems
+**Author:** HAKOYA LLC
 **Date closed:** 2 August 2026
 **Total checks:** 75 (26 source verifications, 49 automated code and consistency tests)
 **Corrections applied:** 11

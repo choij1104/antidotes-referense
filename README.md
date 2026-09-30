@@ -84,5 +84,5 @@ Current status is recorded in `version.json` and the verification record in `QA-
 
 ---
 
-Compiled by **HAKOYA LLC dba Auravyx Systems**
-© 2026 HAKOYA LLC dba Auravyx Systems. All rights reserved.
+Compiled by **HAKOYA LLC**
+© 2026 HAKOYA LLC. All rights reserved.
